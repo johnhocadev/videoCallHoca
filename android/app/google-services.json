@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "24585157613",
+    "project_id": "videocallhoca",
+    "storage_bucket": "videocallhoca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24585157613:android:63ea105d4c2b66d1ebc5e4",
+        "android_client_info": {
+          "package_name": "com.mycompany.videocallapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24585157613-5b2rf6ld4jruii387gd5a4upmeqtjfs5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.videocallapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "24585157613-qfi10vaolln1dbjt5nflafied5j75a0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTh4S6yof-ETeshy7Btk0mnoCLXsx44q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24585157613-a60092mhjsotmvc8s7tmakc5qvjq6ne9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "24585157613-0ns9gs415hq6rtf14kg89qj6up193m8f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.videocallapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24585157613:android:5431c93133aed986ebc5e4",
+        "android_client_info": {
+          "package_name": "video_call.hoca1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24585157613-tim85qccea1jg530i3m3nbmf9v72ijvj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "video_call.hoca1",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "24585157613-qfi10vaolln1dbjt5nflafied5j75a0c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTh4S6yof-ETeshy7Btk0mnoCLXsx44q0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24585157613-a60092mhjsotmvc8s7tmakc5qvjq6ne9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "24585157613-0ns9gs415hq6rtf14kg89qj6up193m8f.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.videocallapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
