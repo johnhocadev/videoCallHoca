@@ -74,6 +74,7 @@ class _MyAppState extends State<MyApp> {
     setState(() => _locale = createLocale(language));
   }
 
+
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);

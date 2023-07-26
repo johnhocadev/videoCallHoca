@@ -24,6 +24,7 @@ class MainFloatingButton extends StatelessWidget {
         child: Icon(
           Icons.phone,
           size: 30.sp,
+          color: AppColors.white,
         ),
         onPressed: () => changePageIndex(1),
       ),

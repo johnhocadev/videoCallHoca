@@ -92,6 +92,7 @@ dependencies:
   video_player_web: 2.0.15
   #video_calling
   agora_rtc_engine: ^6.2.1
+  permission_handler: any
   #state_management
   hooks_riverpod: ^2.3.0
   # screen_size_adaptivity

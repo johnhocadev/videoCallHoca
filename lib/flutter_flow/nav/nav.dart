@@ -87,6 +87,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/homePage',
           builder: (context, params) => MainPage(),
         ),
+        // FFRoute(
+        //   name: 'CallPage',
+        //   path: '/callPage',
+        //   builder: (context, params) => MainPage(),
+        // ),
         FFRoute(
           name: 'Onboarding',
           path: '/onboarding',
