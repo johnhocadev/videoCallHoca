@@ -6,7 +6,8 @@ import 'package:video_call_app/pages/call/presentation/widget/switch_button.dart
 import 'package:video_call_app/pages/call/view_model/provider/call_provider.dart';
 
 const appId = '979ff86d7339456595fd0661b0fc081e';
-const token = '007eJxTYEjPzpnotaLo+87wpGcJc9vLZdMPPekzDHx23+LZ/cQJMxIUGFKTU1NSU82TUwzTTEyMU80tzM3NDc0Sk40NDVKMLAzNnrIeTGkIZGQ4uzmKlZEBAkF8ToayzJTU/OTEnBwGBgCvdiPt';
+const token =
+    '007eJxTYEjPzpnotaLo+87wpGcJc9vLZdMPPekzDHx23+LZ/cQJMxIUGFKTU1NSU82TUwzTTEyMU80tzM3NDc0Sk40NDVKMLAzNnrIeTGkIZGQ4uzmKlZEBAkF8ToayzJTU/OTEnBwGBgCvdiPt';
 
 class CallPage extends ConsumerWidget {
   const CallPage({Key? key}) : super(key: key);
@@ -19,10 +20,18 @@ class CallPage extends ConsumerWidget {
       appBar: AppBar(
         leading: Icon(Icons.menu),
         actions: [
-          Center(child: Text("Video",style: TextStyle(fontSize: 20),)),
-          SizedBox(width: 10,),
+          Center(
+              child: Text(
+            "Video",
+            style: TextStyle(fontSize: 20),
+          )),
+          SizedBox(
+            width: 10,
+          ),
           SwitcherWidget(switcher: callTool.switcher),
-          SizedBox(width: 10,),
+          SizedBox(
+            width: 10,
+          ),
         ],
       ),
       body: ListView.builder(
@@ -30,11 +39,15 @@ class CallPage extends ConsumerWidget {
         itemBuilder: (context, index) {
           final item = users[index];
           return InkWell(
-            onTap: (){
-              context.goNamedAuth('authentication', context.mounted);
-              CallingPage(remoteUid: 0,callTool: callTool,);
-            },
-
+              onTap: () {
+                // context.goNamedAuth('CallPage', context.mounted,queryParameters:  );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          CallingPage()),
+                );
+              },
               child: Container(
                 margin: EdgeInsets.all(10),
                 alignment: Alignment.centerLeft,
