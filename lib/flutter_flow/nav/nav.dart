@@ -3,15 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import '../flutter_flow_theme.dart';
-import '/backend/backend.dart';
+import 'package:video_call_app/pages/main/presentation/page/main_page.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
 import '../../index.dart';
-import '../../main.dart';
-import '../lat_lng.dart';
-import '../place.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -77,19 +73,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : AuthenticationWidget(),
+          appStateNotifier.loggedIn ? MainPage() : AuthenticationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? HomePageWidget()
+              ? MainPage()
               : AuthenticationWidget(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => MainPage(),
         ),
         FFRoute(
           name: 'Onboarding',
