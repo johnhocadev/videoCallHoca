@@ -130,30 +130,31 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
           top: true,
           child: Stack(
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(32.0, 32.0, 32.0, 32.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 230.0,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    borderRadius: BorderRadius.circular(16.0),
-                  ),
-                  alignment: AlignmentDirectional(0.0, 0.0),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 72.0),
-                    child: Text(
-                      'Video Call Hoca',
-                      style: FlutterFlowTheme.of(context).displaySmall,
-                    ),
-                  ),
-                ),
-              ),
+                     
+              // Padding(
+              //   padding: EdgeInsetsDirectional.fromSTEB(32.0, 32.0, 32.0, 32.0),
+              //   child: Container(
+              //     width: double.infinity,
+              //     height: 230.0,
+              //     decoration: BoxDecoration(
+              //       color: FlutterFlowTheme.of(context).primaryBackground,
+              //       borderRadius: BorderRadius.circular(16.0),
+              //     ),
+              //     alignment: AlignmentDirectional(0.0, 0.0),
+              //     child: Padding(
+              //       padding:
+              //           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 72.0),
+              //       child: Text(
+              //         'Video Call Hoca',
+              //         style: FlutterFlowTheme.of(context).displaySmall,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Align(
                 alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 170.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 80.0, 0.0, 0.0),
                   child: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
@@ -264,13 +265,147 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                             .secondaryBackground,
                                                       ),
                                                     ),
-                                                  Text(
-                                                    'Create Account',
-                                                    textAlign: TextAlign.start,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineMedium,
-                                                  ),
+                                                  //    Text(
+                                                  //   'Create Account',
+                                                  //   textAlign: TextAlign.start,
+                                                  //   style: FlutterFlowTheme.of(
+                                                  //           context)
+                                                  //       .headlineMedium,
+                                                  // ),
+                                                    Align(
+                       alignment: AlignmentDirectional.topCenter,
+                       child: Container(
+                         width: 100.0,
+                         height: 100.0,
+                         child: Stack(
+                           children: [
+                             Align(
+                               alignment:
+                                   AlignmentDirectional(
+                                       0.0, 0.0),
+                               child: Container(
+                                 width: 120.0,
+                                 height: 120.0,
+                                 clipBehavior: Clip
+                                     .antiAlias,
+                                 decoration:
+                                     BoxDecoration(
+                                   shape: BoxShape
+                                       .circle,
+                                 ),
+                                 child: Image
+                                     .network(
+                                   valueOrDefault<
+                                       String>(
+                                     _model
+                                         .uploadedFileUrl,
+                                     'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png',
+                                   ),
+                                   fit: BoxFit
+                                       .cover,
+                                 ),
+                               ),
+                             ),
+                             Align(
+                               alignment:
+                                   AlignmentDirectional(
+                                       1.0, 1.0),
+                               child: InkWell(
+                                 splashColor: Colors
+                                     .transparent,
+                                 focusColor: Colors
+                                     .transparent,
+                                 hoverColor: Colors
+                                     .transparent,
+                                 highlightColor:
+                                     Colors
+                                         .transparent,
+                                 onTap:
+                                     () async {
+                                   final selectedMedia =
+                                       await selectMediaWithSourceBottomSheet(
+                                     context:
+                                         context,
+                                     allowPhoto:
+                                         true,
+                                   );
+                                   if (selectedMedia !=
+                                           null &&
+                                       selectedMedia.every((m) => validateFileFormat(
+                                           m.storagePath,
+                                           context))) {
+                                     setState(() =>
+                                         _model.isDataUploading =
+                                             true);
+                                     var selectedUploadedFiles =
+                                         <FFUploadedFile>[];
+
+                                     var downloadUrls =
+                                         <String>[];
+                                     try {
+                                       selectedUploadedFiles = selectedMedia
+                                           .map((m) => FFUploadedFile(
+                                                 name: m.storagePath.split('/').last,
+                                                 bytes: m.bytes,
+                                                 height: m.dimensions?.height,
+                                                 width: m.dimensions?.width,
+                                                 blurHash: m.blurHash,
+                                               ))
+                                           .toList();
+
+                                       downloadUrls = (await Future
+                                               .wait(
+                                         selectedMedia
+                                             .map(
+                                           (m) async => await uploadData(
+                                               m.storagePath,
+                                               m.bytes),
+                                         ),
+                                       ))
+                                           .where((u) =>
+                                               u !=
+                                               null)
+                                           .map((u) =>
+                                               u!)
+                                           .toList();
+                                     } finally {
+                                       _model.isDataUploading =
+                                           false;
+                                     }
+                                     if (selectedUploadedFiles.length ==
+                                             selectedMedia
+                                                 .length &&
+                                         downloadUrls.length ==
+                                             selectedMedia.length) {
+                                       setState(
+                                           () {
+                                         _model.uploadedLocalFile =
+                                             selectedUploadedFiles.first;
+                                         _model.uploadedFileUrl =
+                                             downloadUrls.first;
+                                       });
+                                     } else {
+                                       setState(
+                                           () {});
+                                       return;
+                                     }
+                                   }
+                                 },
+                                 child: Icon(
+                                   Icons
+                                       .edit_outlined,
+                                   color: FlutterFlowTheme.of(
+                                           context)
+                                       .secondaryText,
+                                   size: 24.0,
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                       ),
+                     ),
+                                                 
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
@@ -286,150 +421,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                               .labelMedium,
                                                     ),
                                                   ),
-                                                  Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  30.0),
-                                                      child: Container(
-                                                        width: 100.0,
-                                                        height: 100.0,
-                                                        child: Stack(
-                                                          children: [
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Container(
-                                                                width: 120.0,
-                                                                height: 120.0,
-                                                                clipBehavior: Clip
-                                                                    .antiAlias,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                ),
-                                                                child: Image
-                                                                    .network(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    _model
-                                                                        .uploadedFileUrl,
-                                                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png',
-                                                                  ),
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      1.0, 1.0),
-                                                              child: InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  final selectedMedia =
-                                                                      await selectMediaWithSourceBottomSheet(
-                                                                    context:
-                                                                        context,
-                                                                    allowPhoto:
-                                                                        true,
-                                                                  );
-                                                                  if (selectedMedia !=
-                                                                          null &&
-                                                                      selectedMedia.every((m) => validateFileFormat(
-                                                                          m.storagePath,
-                                                                          context))) {
-                                                                    setState(() =>
-                                                                        _model.isDataUploading =
-                                                                            true);
-                                                                    var selectedUploadedFiles =
-                                                                        <FFUploadedFile>[];
-
-                                                                    var downloadUrls =
-                                                                        <String>[];
-                                                                    try {
-                                                                      selectedUploadedFiles = selectedMedia
-                                                                          .map((m) => FFUploadedFile(
-                                                                                name: m.storagePath.split('/').last,
-                                                                                bytes: m.bytes,
-                                                                                height: m.dimensions?.height,
-                                                                                width: m.dimensions?.width,
-                                                                                blurHash: m.blurHash,
-                                                                              ))
-                                                                          .toList();
-
-                                                                      downloadUrls = (await Future
-                                                                              .wait(
-                                                                        selectedMedia
-                                                                            .map(
-                                                                          (m) async => await uploadData(
-                                                                              m.storagePath,
-                                                                              m.bytes),
-                                                                        ),
-                                                                      ))
-                                                                          .where((u) =>
-                                                                              u !=
-                                                                              null)
-                                                                          .map((u) =>
-                                                                              u!)
-                                                                          .toList();
-                                                                    } finally {
-                                                                      _model.isDataUploading =
-                                                                          false;
-                                                                    }
-                                                                    if (selectedUploadedFiles.length ==
-                                                                            selectedMedia
-                                                                                .length &&
-                                                                        downloadUrls.length ==
-                                                                            selectedMedia.length) {
-                                                                      setState(
-                                                                          () {
-                                                                        _model.uploadedLocalFile =
-                                                                            selectedUploadedFiles.first;
-                                                                        _model.uploadedFileUrl =
-                                                                            downloadUrls.first;
-                                                                      });
-                                                                    } else {
-                                                                      setState(
-                                                                          () {});
-                                                                      return;
-                                                                    }
-                                                                  }
-                                                                },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .edit_outlined,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                                  size: 24.0,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
+                                           //TODO: old picture upload location
                                                   Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
