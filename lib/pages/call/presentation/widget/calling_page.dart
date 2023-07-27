@@ -95,6 +95,9 @@ class _CallingPageState extends ConsumerState<CallingPage> {
       }, onUserJoined: (RtcConnection connection, remoteUID, elapsed) {
         final info = 'UserJoined: $remoteUID';
         _infoString.add(info);
+        setState(() {
+          _users.add(remoteUID); // Add the remote user to the list
+        });
       }, onUserOffline:
           (RtcConnection connection, remoteUid, UserOfflineReasonType type) {
         final info = '$remoteUid goes offline because ${type.name}';
