@@ -20,6 +20,10 @@ class EditInfoModel extends FlutterFlowModel {
   TextEditingController? textController2;
   String? Function(BuildContext, String?)? textController2Validator;
 
+TextEditingController? textController3;
+  String? Function(BuildContext, String?)? textController3Validator;
+
+  
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
@@ -28,6 +32,7 @@ class EditInfoModel extends FlutterFlowModel {
     unfocusNode.dispose();
     textController1?.dispose();
     textController2?.dispose();
+    textController3?.dispose();
   }
 
   /// Action blocks are added here.

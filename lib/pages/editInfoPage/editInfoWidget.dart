@@ -33,7 +33,7 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
   late EditInfoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+TextEditingController passController = TextEditingController();
   final animationsMap = {
     'buttonOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -90,6 +90,50 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
   super.dispose();
   }
 
+
+
+Future<void> updateUserInformation(
+  String displayName,
+  String email,
+  String password,
+  String photoUrl,
+) async {
+  try {
+    User? currentUser = FirebaseAuth.instance.currentUser;
+    String userId = currentUser!.uid;
+
+    // Step 1: Re-authenticate the user with their existing credentials
+    AuthCredential credential = EmailAuthProvider.credential(email: currentUser.email!, password: password);
+    await currentUser.reauthenticateWithCredential(credential);
+
+    // Step 2: Update display name and photo URL in Firebase Authentication
+    // ignore: deprecated_member_use
+    await currentUser.updateProfile(displayName: displayName, photoURL: photoUrl);
+
+    // Step 3: Update email if it has changed
+    if (email != currentUser.email) {
+      await currentUser.updateEmail(email);
+    }
+
+    // Step 4: Update password if it has changed
+    if (password.isNotEmpty) {
+      await currentUser.updatePassword(password);
+    }
+
+    // Step 5: Update user data in Firestore
+    DocumentReference userDocRef = FirebaseFirestore.instance.collection('users').doc(userId);
+    await userDocRef.update({
+      'display_name': displayName,
+      'email': email,
+      'photo_url': photoUrl,
+    });
+
+    print('User information updated successfully.');
+  } catch (e) {
+    print('Error updating user information: $e');
+    // Handle errors as per your app's requirements.
+  }
+}
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -98,28 +142,26 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
       onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        automaticallyImplyLeading: false,
+        
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black,),
             onPressed: () => context.pop(),
           ),
-          title: Align(
-            alignment: AlignmentDirectional(0, 0),
-            child: Text(
-              'Edit profile',
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Outfit',
-                    color: Colors.white,
-                    fontSize: 22,
-                  ),
-            ),
+          title: Text(
+            'Edit profile',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Outfit',
+                  color: Colors.black,
+                  fontSize: 22,
+                ),
           ),
           actions: [],
           centerTitle: true,
-          elevation: 2,
+          elevation: 0,
         ),
         body: SafeArea(
           top: true,
@@ -142,7 +184,7 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
                             autofocus: true,
                             obscureText: false,
                             decoration: InputDecoration(
-                              labelText: 'enter new username',
+                              labelText: 'Enter new username',
                               labelStyle:
                                   FlutterFlowTheme.of(context).labelMedium,
                               hintText: 'username',
@@ -191,10 +233,10 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
-                            labelText: 'enter new email address',
+                            labelText: 'Enter new email address',
                             labelStyle:
                                 FlutterFlowTheme.of(context).labelMedium,
-                            hintText: 'enter new email adress',
+                            hintText: 'email',
                             hintStyle: FlutterFlowTheme.of(context).labelMedium,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -231,17 +273,69 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
                               .asValidator(context),
                         ),
                       ),
+                       Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(15, 8, 15, 0),
+                        child: TextFormField(
+                          controller: passController,
+                          autofocus: true,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: 'Enter new password',
+                            labelStyle:
+                                FlutterFlowTheme.of(context).labelMedium,
+                            hintText: 'password',
+                            hintStyle: FlutterFlowTheme.of(context).labelMedium,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).primary,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).error,
+                                width: 2,
+                              ),
+                              borderRadius: BorderRadius.circular(8), 
+                            ),
+                            filled: true,
+                          ),
+                          style: FlutterFlowTheme.of(context).bodyMedium,
+                          // validator: _model.textController3Validator
+                              // .asValidator(context),
+                        ),
+                      ),
+                      // Container(
+                      //   height: 100,
+                      //   width: 100,
+                      //   child: Icon(Icons.image),
+                      // )
                     ],
                   ),
                 ),
               ),
               Align(
                 alignment: AlignmentDirectional(0, 0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                   if (_model.textController1.text.isNotEmpty && _model.textController2.text.isNotEmpty){
+                child:    Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0, 300, 0, 0),
+            child: FFButtonWidget(
+              onPressed: () async {
+                   if (_model.textController1.text.isNotEmpty && _model.textController2.text.isNotEmpty && passController.text.isNotEmpty){
                      showDialog(context: context, builder: (context){
                       return Container(
                         height: 200,
@@ -250,15 +344,20 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
                           content: Text('Data saved'),
                           actions: [
                             TextButton(onPressed: (){
+                             
                               context.pop();
                             
                             }, child: Text('Cancel')),
                                 TextButton(onPressed: (){
-                                  updateProfilEmail(_model.textController2.text);
-                                  updateProfileName(_model.textController1.text);
-                                
-                              context.pop();
-                              context.safePop();
+                                 print('data saved');
+                                 updateUserInformation(_model.textController1.text, _model.textController2.text, passController.text, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-3382ZgdUhzsOz0VYE8KVNtX_HTwTxRSps08Nli1&s');
+                                 print(_model.textController3.text);
+            //                      Future.delayed(Duration(seconds: 3), () {
+            //                       Center(child: CircularProgressIndicator(),);
+            // });
+                 context.pop();
+                              context.pushReplacementNamed('Main');
+                           
                             }, child: Text('Save')),
                           ],
                           ),
@@ -268,25 +367,77 @@ class _EditInfoWidgetState extends State<EditInfoWidget>
                    } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Fill both fields!')));
                    }
-                    },
-                    text: 'Save ',
-                    options: FFButtonOptions(
-                      width: 150,
-                      height: 44,
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-                      color: FlutterFlowTheme.of(context).primaryBackground,
-                      textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                      elevation: 0,
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).accent1,
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(38),
+              },
+              text: 'Save',
+              options: FFButtonOptions(
+                width: 190,
+                height: 50,
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                color: FlutterFlowTheme.of(context).primary,
+                textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                      fontFamily: 'Readex Pro',
+                      color: Colors.white,
                     ),
-                  ).animateOnPageLoad(
-                      animationsMap['buttonOnPageLoadAnimation']!),
+                elevation: 3,
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
                 ),
+                borderRadius: BorderRadius.circular(30),
+              ),
+            ),
+          ),
+                // child: Padding(
+                //   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
+                //   child: FFButtonWidget(
+                  //   onPressed: () async {
+                  //  if (_model.textController1.text.isNotEmpty && _model.textController2.text.isNotEmpty){
+                  //    showDialog(context: context, builder: (context){
+                  //     return Container(
+                  //       height: 200,
+                  //       width: 200,
+                  //       child: AlertDialog(
+                  //         content: Text('Data saved'),
+                  //         actions: [
+                  //           TextButton(onPressed: (){
+                  //             context.pop();
+                            
+                  //           }, child: Text('Cancel')),
+                  //               TextButton(onPressed: (){
+                  //                 updateProfilEmail(_model.textController2.text);
+                  //                 updateProfileName(_model.textController1.text);
+                                
+                  //             context.pop();
+                  //             context.safePop();
+                  //           }, child: Text('Save')),
+                  //         ],
+                  //         ),
+                          
+                  //     );
+                  //   });
+                  //  } else {
+                  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Fill both fields!')));
+                  //  }
+                //     },
+                //     text: 'Save ',
+                //     options: FFButtonOptions(
+                //       width: 150,
+                //       height: 44,
+                //       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                //       iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                //       color: FlutterFlowTheme.of(context).primaryBackground,
+                //       textStyle: FlutterFlowTheme.of(context).bodyMedium,
+                //       elevation: 0,
+                //       borderSide: BorderSide(
+                //         color: FlutterFlowTheme.of(context).accent1,
+                //         width: 2,
+                //       ),
+                //       borderRadius: BorderRadius.circular(38),
+                //     ),
+                //   ).animateOnPageLoad(
+                //       animationsMap['buttonOnPageLoadAnimation']!),
+                // ),
               ),
             ],
           ),

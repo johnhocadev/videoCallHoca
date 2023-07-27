@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:video_call_app/backend/backend.dart';
 import 'package:video_call_app/pages/editInfoPage/editInfoWidget.dart';
-import 'package:video_call_app/pages/settings/presentation/view_model/settings_vm.dart';
+import 'package:video_call_app/pages/settings/presentation/pages/settings_vm.dart';
 
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -67,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage>
           !anim.applyInitialState),
       this,
     );
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       setState(() {
         isLoading = false;
       });
@@ -243,51 +243,54 @@ void getData()async {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-            child: Container(
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 3,
-                    color: Color(0x33000000),
-                    offset: Offset(0, 1),
-                  )
-                ],
-                borderRadius: BorderRadius.circular(8),
-                shape: BoxShape.rectangle,
-              ),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Icon(
-                      Icons.notifications_none,
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      size: 24,
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                      child: Text(
-                        'Notification Settings',
-                        style: FlutterFlowTheme.of(context).labelLarge,
+          GestureDetector(
+            onTap: () => context.pushNamed('Notification'),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+              child: Container(
+                width: double.infinity,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 3,
+                      color: Color(0x33000000),
+                      offset: Offset(0, 1),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(8),
+                  shape: BoxShape.rectangle,
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Icon(
+                        Icons.notifications_none,
+                        color: FlutterFlowTheme.of(context).secondaryText,
+                        size: 24,
                       ),
-                    ),
-                    Expanded(
-                      child: Align(
-                        alignment: AlignmentDirectional(0.9, 0),
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 18,
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                        child: Text(
+                          'Notification Settings',
+                          style: FlutterFlowTheme.of(context).labelLarge,
                         ),
                       ),
-                    ),
-                  ],
+                      Expanded(
+                        child: Align(
+                          alignment: AlignmentDirectional(0.9, 0),
+                          child: Icon(
+                            Icons.arrow_forward_ios,
+                            color: FlutterFlowTheme.of(context).secondaryText,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

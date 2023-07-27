@@ -6,6 +6,8 @@ import 'package:page_transition/page_transition.dart';
 import 'package:video_call_app/pages/call/presentation/widget/calling_page.dart';
 import 'package:video_call_app/pages/editInfoPage/editInfoWidget.dart';
 import 'package:video_call_app/pages/main/presentation/page/main_page.dart';
+import 'package:video_call_app/pages/settings/notification/notification_view.dart';
+import 'package:video_call_app/pages/settings/presentation/pages/settings_page.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
@@ -112,6 +114,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'EditInfoPage',
           path: '/editinfopage',
           builder: (context, params) => EditInfoWidget(),
+        ),
+         FFRoute(
+          name: 'Notification',
+          path: '/notification',
+          builder: (context, params) => NotificationWidget(),
+        ),
+        FFRoute(
+          name: 'Settings',
+          path: '/settings',
+          builder: (context, params) => SettingsPage(),
+        ),
+         FFRoute(
+          name: 'Main',
+          path: '/main',
+          builder: (context, params) => MainPage(),
         ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
