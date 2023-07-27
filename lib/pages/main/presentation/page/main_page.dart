@@ -20,6 +20,8 @@ class MainPage extends ConsumerWidget {
     ];
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       body: _pages[mainTool.pageIndex],
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
