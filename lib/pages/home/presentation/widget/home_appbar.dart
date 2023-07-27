@@ -1,3 +1,5 @@
+import 'package:avatar_view/avatar_view.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_call_app/core/service/localisation/my_words.dart';
@@ -5,7 +7,8 @@ import 'package:video_call_app/core/style/colors.dart';
 import 'package:video_call_app/core/style/text_style.dart';
 
 class HomeAppBarHome extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBarHome({Key? key}) : super(key: key);
+  String imageUrl;
+   HomeAppBarHome({Key? key, required this.imageUrl}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => AppBar(
@@ -37,9 +40,12 @@ class HomeAppBarHome extends StatelessWidget implements PreferredSizeWidget {
       ),
       SizedBox(width: 15.w),
     ],
-    leading: const CircleAvatar(
-      backgroundColor: AppColors.yellow,
-      child: Icon(Icons.person,color: AppColors.black,),
+    leading: AvatarView(
+      imagePath: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-3382ZgdUhzsOz0VYE8KVNtX_HTwTxRSps08Nli1&s',
+      placeHolder: Icon(Icons.error),
+      avatarType: AvatarType.CIRCLE,
+      radius: 20,
+      
     ),
   );
 

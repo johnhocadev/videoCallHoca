@@ -247,149 +247,151 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      width: double.infinity,
-                      height: 600.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      child: MasonryGridView.count(
-                        physics: const NeverScrollableScrollPhysics(),
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        itemCount: 11,
-                        itemBuilder: (context, index) {
-                          return [
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(16.0),
-                                    topLeft: Radius.circular(0.0),
-                                    topRight: Radius.circular(16.0),
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        height: 600.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        child: MasonryGridView.count(
+                          physics: const NeverScrollableScrollPhysics(),
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          itemCount: 11,
+                          itemBuilder: (context, index) {
+                            return [
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(0.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(0.0),
+                                      topRight: Radius.circular(16.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+                                      width: 120.0,
+                                      height: 120.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
-                                    width: 120.0,
-                                    height: 120.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1599415738227-ff7b04bec5af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
+                                      width: 120.0,
+                                      height: 160.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1599415738227-ff7b04bec5af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80',
-                                    width: 120.0,
-                                    height: 160.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(0.0),
+                                      bottomRight: Radius.circular(16.0),
+                                      topLeft: Radius.circular(0.0),
+                                      topRight: Radius.circular(16.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://picsum.photos/seed/32/600',
+                                      width: 100.0,
+                                      height: 0.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(0.0),
-                                    bottomRight: Radius.circular(16.0),
-                                    topLeft: Radius.circular(0.0),
-                                    topRight: Radius.circular(16.0),
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(0.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1600966878954-39bd28539748?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
+                                      width: 80.0,
+                                      height: 180.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: Image.network(
-                                    'https://picsum.photos/seed/32/600',
-                                    width: 100.0,
-                                    height: 0.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1586980368323-8ce5db4c85ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1429&q=80',
+                                      width: 120.0,
+                                      height: 160.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(16.0),
-                                    topRight: Radius.circular(0.0),
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1588873281272-14886ba1f737?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1625&q=80',
+                                      width: 120.0,
+                                      height: 180.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1600966878954-39bd28539748?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-                                    width: 80.0,
-                                    height: 180.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(0.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1612831820363-9b92f70109a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
+                                      width: 120.0,
+                                      height: 190.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1586980368323-8ce5db4c85ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1429&q=80',
-                                    width: 120.0,
-                                    height: 160.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1616587896649-79b16d8b173d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                                      width: 120.0,
+                                      height: 160.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1588873281272-14886ba1f737?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1625&q=80',
-                                    width: 120.0,
-                                    height: 180.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1628633705678-96a6519e9684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+                                      width: 120.0,
+                                      height: 180.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(16.0),
-                                    topRight: Radius.circular(0.0),
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1632467362004-cf9278e0e781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+                                      width: 120.0,
+                                      height: 160.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1612831820363-9b92f70109a4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80',
-                                    width: 120.0,
-                                    height: 190.0,
-                                    fit: BoxFit.cover,
+                              () => ClipRRect(
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(16.0),
+                                      bottomRight: Radius.circular(0.0),
+                                      topLeft: Radius.circular(16.0),
+                                      topRight: Radius.circular(0.0),
+                                    ),
+                                    child: Image.network(
+                                      'https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
+                                      width: 120.0,
+                                      height: 190.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1616587896649-79b16d8b173d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-                                    width: 120.0,
-                                    height: 160.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1628633705678-96a6519e9684?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
-                                    width: 120.0,
-                                    height: 180.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.circular(16.0),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1632467362004-cf9278e0e781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
-                                    width: 120.0,
-                                    height: 160.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                            () => ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(16.0),
-                                    bottomRight: Radius.circular(0.0),
-                                    topLeft: Radius.circular(16.0),
-                                    topRight: Radius.circular(0.0),
-                                  ),
-                                  child: Image.network(
-                                    'https://images.unsplash.com/photo-1614597396930-cd6760b99f7c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzZ8fG1vdW50YWluc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=700&q=60',
-                                    width: 120.0,
-                                    height: 190.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                          ][index]();
-                        },
-                      ),
-                    ).animateOnPageLoad(
-                        animationsMap['containerOnPageLoadAnimation']!),
+                            ][index]();
+                          },
+                        ),
+                      ).animateOnPageLoad(
+                          animationsMap['containerOnPageLoadAnimation']!),
+                    ),
                   ],
                 ),
               ),
@@ -415,7 +417,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 50.0),
+                                  0.0, 0.0, 0.0, 60.0),
                               child: PageView(
                                 controller: _model.pageViewController ??=
                                     PageController(initialPage: 0),
@@ -423,7 +425,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        48.0, 0.0, 48.0, 0.0),
+                                        20.0, 0.0, 48.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
