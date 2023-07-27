@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:video_call_app/pages/call/presentation/widget/calling_page.dart';
 import 'package:video_call_app/pages/main/presentation/page/main_page.dart';
 
 import '../../auth/base_auth_user_provider.dart';
@@ -88,13 +87,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/homePage',
           builder: (context, params) => MainPage(),
         ),
-        FFRoute(
-          name: 'CallPage',
-          path: '/callPage',
-
-
-          builder: (context, state) => CallingPage()
-        ),
+        // FFRoute(
+        //   name: 'CallPage',
+        //   path: '/callPage',
+        //
+        //
+        //   builder: (context, state) => CallingPage()
+        // ),
         FFRoute(
           name: 'Onboarding',
           path: '/onboarding',
