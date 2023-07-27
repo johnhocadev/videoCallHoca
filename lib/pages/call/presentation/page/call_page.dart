@@ -41,7 +41,7 @@ class _CallPageState extends ConsumerState<CallPage> {
             style: TextStyle(fontSize: 20),
           )),
           SizedBox(width: 10),
-          SwitcherWidget(switcher: ref.read(callProvider).switcher),
+          SwitcherWidget(switcher: ref.watch(callProvider).switcher),
           SizedBox(width: 10),
         ],
       ),
@@ -65,9 +65,9 @@ class _CallPageState extends ConsumerState<CallPage> {
                 value: ClientRoleType.clientRoleAudience,
                 groupValue: _role,
                 onChanged: (ClientRoleType? role) {
-                  _role = role;
-                  setState(() {
 
+                  setState(() {
+                    _role = role;
                   });
 
                 },
@@ -104,6 +104,7 @@ class _CallPageState extends ConsumerState<CallPage> {
     if (ref.watch(callProvider).switcher) {
       await _handleCameraAndMic(Permission.camera);
     }
+    print("SWITCHER WAS ${ref.watch(callProvider).switcher}");
     await Navigator.push(
       context,
       MaterialPageRoute(

@@ -93,13 +93,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/homePage',
           builder: (context, params) => MainPage(),
         ),
-        FFRoute(
-          name: 'CallPage',
-          path: '/callPage',
-
-
-          builder: (context, state) => CallingPage()
-        ),
+        // FFRoute(
+        //   name: 'CallPage',
+        //   path: '/callPage',
+        //
+        //
+        //   builder: (context, state) => CallingPage()
+        // ),
         FFRoute(
           name: 'Onboarding',
           path: '/onboarding',

@@ -30,8 +30,9 @@ class _CallingPageState extends ConsumerState<CallingPage> {
 
   @override
   void initState() {
-    _initialize();
     enableVideo = widget.enabledVideo;
+
+    _initialize();
 
     super.initState();
   }
@@ -56,7 +57,8 @@ class _CallingPageState extends ConsumerState<CallingPage> {
       appId: appId,
       channelProfile: ChannelProfileType.channelProfileLiveBroadcasting,
     ));
-    if (widget.enabledVideo) {
+    if (enableVideo) {
+
       await _engine.enableVideo();
     }
     await _engine

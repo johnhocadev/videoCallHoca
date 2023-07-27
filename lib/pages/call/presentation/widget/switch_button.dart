@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:video_call_app/pages/call/view_model/provider/call_provider.dart';
 
-class SwitcherWidget extends StatefulWidget {
+class SwitcherWidget extends StatefulHookConsumerWidget {
   final bool switcher;
   const SwitcherWidget({required this.switcher,Key? key}) : super(key: key);
 
   @override
-  State<SwitcherWidget> createState() => _SwitcherWidgetState();
+  ConsumerState<SwitcherWidget> createState() => _SwitcherWidgetState();
 }
 
-class _SwitcherWidgetState extends State<SwitcherWidget> with SingleTickerProviderStateMixin {
+class _SwitcherWidgetState extends ConsumerState<SwitcherWidget> with SingleTickerProviderStateMixin {
   bool isChecked = false;
   Duration _duration = Duration(milliseconds: 370);
   late Animation<Alignment> _animation;
@@ -37,6 +39,7 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    final callTool = ref.watch(callProvider);
     return AnimatedBuilder(
       animation: _animationController,
       builder: (context, child) {
@@ -46,13 +49,13 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with SingleTickerProvid
             height: 40,
             padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
             decoration: BoxDecoration(
-                color: isChecked ? Colors.black : Colors.grey,
+                color: callTool.switcher ? Colors.black : Colors.grey,
                 borderRadius: BorderRadius.all(
                   Radius.circular(40),
                 ),
                 boxShadow: [
                   BoxShadow(
-                      color: isChecked ? Colors.black : Colors.grey,
+                      color: callTool.switcher ? Colors.black : Colors.grey,
                       blurRadius: 12,
                       offset: Offset(0, 8))
                 ]),
@@ -68,7 +71,7 @@ class _SwitcherWidgetState extends State<SwitcherWidget> with SingleTickerProvid
                         } else {
                           _animationController.forward();
                         }
-                        isChecked = !isChecked;
+                        callTool.switcher = !callTool.switcher;
                       });
                     },
                     child: Container(
