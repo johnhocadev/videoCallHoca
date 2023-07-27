@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/backend/firebase_storage/storage.dart';
@@ -115,6 +117,11 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
     super.dispose();
   }
 
+
+ Future<void> sendPasswordResetEmail(String email) async{
+    await FirebaseAuth.instance.setLanguageCode("kr");
+    await FirebaseAuth.instance.sendPasswordResetEmail(email:email);
+  }
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -879,6 +886,7 @@ class _AuthenticationWidgetState extends State<AuthenticationWidget>
                                                                   16.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
+                                        
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
                                                           final user =

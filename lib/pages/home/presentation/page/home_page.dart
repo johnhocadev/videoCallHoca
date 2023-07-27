@@ -8,7 +8,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: HomeAppBarHome(),
+      appBar: HomeAppBarHome(imageUrl: 'https://images.unsplash.com/photo-1690086142286-caccce218c0e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',),
     );
   }
 }
