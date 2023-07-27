@@ -93,7 +93,17 @@ void getData()async {
     User? user = FirebaseAuth.instance.currentUser;
     _uid = user!.uid;
     final DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(_uid).get();
-    userDoc.get('photo_url')== null ? CircularProgressIndicator() :
+    userDoc.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    get('photo_url')== null ? CircularProgressIndicator() :
     setState(() {
       _name = userDoc.get('display_name');
       _email = user.email;
