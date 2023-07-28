@@ -27,8 +27,10 @@ class CallingPage extends ConsumerWidget {
     );
 
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+
         title: Text("Inside Channel"),
         centerTitle: true,
         actions: [
@@ -43,10 +45,11 @@ class CallingPage extends ConsumerWidget {
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
+
           ViewRows(roleType: roleType, channelName: channelName, provider: provider),
           ViewPanel(provider: provider),
           Positioned(
-            child: ToolBar(provider: provider, context: context),
+            child: ToolBar(provider: provider),
             bottom: 10,
           )
         ],

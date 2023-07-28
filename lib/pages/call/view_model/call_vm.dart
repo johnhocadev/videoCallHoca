@@ -13,6 +13,25 @@ class CallVM extends ChangeNotifier {
   bool get validator => _validator;
   ClientRoleType get role => _role;
   bool get switcher => _switcher;
+  List<Color> colorList = [
+    Color(0xffFF0000),
+    Color(0xff410D75),
+    Color(0xffFF0000),
+    Color(0xff050340),
+    Color(0xffFF0000),
+  ];
+  int index = 0;
+  Color bottomColor = Color(0xff092646);
+  Color topColor = Color(0xff410D75);
+  Alignment begin = Alignment.bottomCenter;
+  Alignment end = Alignment.topCenter;
+
+  void updateColors() {
+    index = index + 1;
+    bottomColor = colorList[index % colorList.length];
+    topColor = colorList[(index + 1) % colorList.length];
+    notifyListeners();
+  }
   // Setter for switcher
   set switcher(bool value) {
     _switcher = value;

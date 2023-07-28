@@ -1,5 +1,5 @@
-const appId = 'ecedee7cd1f443e7877716ac310d2816';
-const token = '007eJxTYFjLp3PsK1fXBa1oZuNjFvJmfV/2VwnnM081uSFerHXYZrYCQ2pyakpqqnlyimGaiYlxqrmFubm5oVlisrGhQYqRhaHZbtFDKQ2BjAyCX3czMEIhiM/JUJaZkpqfnJiTw8AAAEh6H5c=';
+const appId = '979ff86d7339456595fd0661b0fc081e';
+const token = '007eJxTYDDfty3DpGjavdfP4uQ7j5wx37m3UfPutfptN+SsPcvn83EoMKQmp6akpponpximmZgYp5pbmJubG5olJhsbGqQYWRiafVx+OKUhkJGh8oM8CyMDBIL4rAxlmSmp+QwMAPylIcE=';
 List<UserModel> users = [
   UserModel.name(name: 'Elmurod aka', channelName: 'videocall'),
 ];

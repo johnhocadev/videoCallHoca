@@ -2,6 +2,8 @@ import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:video_call_app/pages/call/view_model/calling_vm.dart';
 
+import 'animated_bg.dart';
+
 class ViewRows extends StatelessWidget {
   const ViewRows({
     super.key,
@@ -40,7 +42,19 @@ class ViewRows extends StatelessWidget {
     }
 
     final views = list;
+         if(views.length == 1){
+           return Stack(
+             children: [
+               AnimatingBg(),
+               Align(
+                 alignment: Alignment.center,
+                 child: Text("Connecting..."),
+               )
 
+
+             ],
+           );
+         }
     return Column(
       children: List.generate(
         views.length,
@@ -51,3 +65,10 @@ class ViewRows extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
