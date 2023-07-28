@@ -14,6 +14,8 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
@@ -102,6 +104,8 @@ class _MyAppState extends State<MyApp> {
         darkTheme: ThemeData(brightness: Brightness.dark),
         themeMode: _themeMode,
         routerConfig: _router,
+
+
       ),
     );
   }

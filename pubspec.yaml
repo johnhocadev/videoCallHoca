@@ -104,6 +104,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   avatar_view: ^1.0.1
   firebase_messaging: ^14.6.2
+  flutter_local_notifications: ^15.1.0+1
 
 dev_dependencies:
 

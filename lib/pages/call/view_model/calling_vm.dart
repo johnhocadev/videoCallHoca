@@ -102,16 +102,28 @@ class CallingPageProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleVideo() {
+  Future<void> toggleVideo() async {
+    print('Toggle Video Function Called');
+    print('enableVideo before: $enableVideo');
+
     if (!enableVideo) {
-      Permission.camera.request().then((value) => _engine!.enableVideo());
-      enableVideo = true;
+      final status = await Permission.camera.request();
+      if (status.isGranted) {
+        _engine!.enableVideo();
+        enableVideo = true;
+      } else {
+        // Handle the case where camera permission is not granted
+      }
     } else {
       _engine!.disableVideo();
       enableVideo = false;
     }
+
+    print('enableVideo after: $enableVideo');
     notifyListeners();
   }
+
+
 
   void toggleViewPanel() {
     viewPanel = !viewPanel;

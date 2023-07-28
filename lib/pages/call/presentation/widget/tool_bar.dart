@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_call_app/pages/call/view_model/calling_vm.dart';
 
-class ToolBar extends StatelessWidget {
+class ToolBar extends ConsumerWidget {
   const ToolBar({
     super.key,
     required this.provider,
-    required this.context,
   });
 
   final CallingPageProvider provider;
-  final BuildContext context;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     // if (roleType == ClientRoleType.clientRoleAudience) return SizedBox();
     return Container(
       alignment: Alignment.center,
@@ -55,8 +54,8 @@ class ToolBar extends StatelessWidget {
               color: provider.isVideoEnabled ? Colors.black : Colors.blue,
               size: 35,
             ),
-            onPressed: () {
-              provider.toggleVideo();
+            onPressed: () async{
+              await provider.toggleVideo();
             },
           ),
         ],

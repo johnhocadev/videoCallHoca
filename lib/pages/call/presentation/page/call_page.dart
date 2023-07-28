@@ -1,4 +1,5 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_call_app/pages/call/presentation/page/calling_page.dart';
@@ -14,7 +15,10 @@ class CallPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final message = ModalRoute.of(context)?.settings.arguments as RemoteMessage?;
     final callTool = ref.watch(callProvider);
+    callTool.channelController.text = message?.notification?.body ?? '';
+
 
     return Scaffold(
       appBar: AppBar(
