@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:video_call_app/core/service/firebase_messaging/messaging.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
@@ -19,13 +20,15 @@ void main() async {
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
-
+  await FirebaseMessagingService().initNotifications();
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
-    child: ProviderScope(child: MyApp(),),
+    child: ProviderScope(
+      child: MyApp(),
+    ),
   ));
 }
 
@@ -74,7 +77,6 @@ class _MyAppState extends State<MyApp> {
     setState(() => _locale = createLocale(language));
   }
 
-
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
@@ -86,7 +88,7 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (BuildContext context, Widget? child) =>  MaterialApp.router(
+      builder: (BuildContext context, Widget? child) => MaterialApp.router(
         title: 'VideoCallApp',
         localizationsDelegates: [
           FFLocalizationsDelegate(),

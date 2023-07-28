@@ -1,47 +1,33 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:video_call_app/pages/call/presentation/widget/calling_page.dart';
+import 'package:video_call_app/pages/call/presentation/page/calling_page.dart';
+import 'package:video_call_app/pages/call/presentation/widget/custom_radio.dart';
 import 'package:video_call_app/pages/call/presentation/widget/switch_button.dart';
 import 'package:video_call_app/pages/call/view_model/provider/call_provider.dart';
 import 'dart:async';
 import 'dart:developer';
 import 'package:permission_handler/permission_handler.dart';
 
-class CallPage extends ConsumerStatefulWidget {
-  const CallPage({
-    Key? key,
-  }) : super(key: key);
+class CallPage extends ConsumerWidget {
+  const CallPage({Key? key}) : super(key: key);
 
   @override
-  ConsumerState createState() => _CallPageState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final callTool = ref.watch(callProvider);
 
-class _CallPageState extends ConsumerState<CallPage> {
-  final _channelController = TextEditingController();
-  bool _validator = false;
-  ClientRoleType? _role = ClientRoleType.clientRoleBroadcaster;
-
-  @override
-  void dispose() {
-    _channelController.dispose();
-
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: Icon(Icons.menu),
         actions: [
           Center(
-              child: Text(
-            "Video",
-            style: TextStyle(fontSize: 20),
-          )),
+            child: Text(
+              "Video",
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
           SizedBox(width: 10),
-          SwitcherWidget(switcher: ref.watch(callProvider).switcher),
+          SwitcherWidget(switcher: callTool.switcher),
           SizedBox(width: 10),
         ],
       ),
@@ -54,36 +40,29 @@ class _CallPageState extends ConsumerState<CallPage> {
               Image.asset('assets/images/video.webp'),
               SizedBox(height: 20),
               TextField(
-                controller: _channelController,
+                controller: callTool.channelController,
                 decoration: InputDecoration(
-                    errorText: _validator ? 'Channel is mandatory' : null,
-                    border: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 1),
-                    ),
-                    hintText: 'Channel name'),
+                  errorText: callTool.validator ? 'Channel is mandatory' : null,
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(width: 1),
+                  ),
+                  hintText: 'Channel name',
+                ),
               ),
               SizedBox(height: 20),
-              RadioListTile(
-                value: ClientRoleType.clientRoleBroadcaster,
-                groupValue: _role,
-                onChanged: (ClientRoleType? role) {
-                  _role = role;
-                  setState(() {});
-                },
-                title: Text('Broadcaster'),
-              ),
-              RadioListTile(
-                value: ClientRoleType.clientRoleAudience,
-                groupValue: _role,
-                onChanged: (ClientRoleType? role) {
-                  setState(() {
-                    _role = role;
-                  });
-                },
-                title: Text('Audience'),
-              ),
+              CustomRadio(
+                  clientValue: ClientRoleType.clientRoleBroadcaster,
+                  clientGroupValue: callTool.role,
+                  updateRole: (role) => callTool.updateRole(role),
+                  title: 'Broadcast'),
+              CustomRadio(
+                  clientValue: ClientRoleType.clientRoleAudience,
+                  clientGroupValue: callTool.role,
+                  updateRole: (role) => callTool.updateRole(role),
+                  title: 'Audience'),
               ElevatedButton(
-                onPressed: () => onJoin(_channelController.text.trim()),
+                onPressed: () => onJoin(
+                    callTool.channelController.text.trim(), ref, context),
                 child: Text("Join"),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(double.infinity, 40),
@@ -96,33 +75,36 @@ class _CallPageState extends ConsumerState<CallPage> {
     );
   }
 
-  Future<void> onJoin(String channelName) async {
-    _channelController.text.isEmpty ? _validator = true : _validator = false;
-    setState(() {});
+  Future<void> onJoin(
+      String channelName, WidgetRef ref, BuildContext context) async {
+    final callTool = ref.read((callProvider));
+    callTool.channelController.text.isEmpty
+        ? callTool.updateValidator(true)
+        : callTool.updateValidator(false);
 
-    if(_channelController.text.isNotEmpty){
-      await _handleCameraAndMic(Permission.microphone);
+    if (callTool.channelController.text.isNotEmpty) {
+      await handleCameraAndMic(Permission.microphone);
 
-      if (ref.watch(callProvider).switcher) {
-        await _handleCameraAndMic(Permission.camera);
+      if (callTool.switcher) {
+        await handleCameraAndMic(Permission.camera);
       }
 
       await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => CallingPage(
-            enabledVideo: ref.watch(callProvider).switcher,
+            enabledVideo: callTool.switcher,
             channelName: channelName,
-            roleType: _role,
+            roleType: callTool.role,
           ),
         ),
       );
     }
-
   }
 
-  Future<void> _handleCameraAndMic(Permission permission) async {
-    final status = permission.request();
+  Future<void> handleCameraAndMic(Permission permission) async {
+    final status = await permission.request();
     log(status.toString());
   }
 }
+

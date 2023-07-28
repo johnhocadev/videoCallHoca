@@ -103,6 +103,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   avatar_view: ^1.0.1
+  firebase_messaging: ^14.6.2
 
 dev_dependencies:
 
