@@ -158,7 +158,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     highlightColor: Colors.transparent,
                     onTap: () async {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> EditInfoWidget()));
-                      // context.pushNamed('editInfo');
+                      // context.pushNamed('editInfo'); 
                     },
                     child: Container(
                       width: double.infinity,
