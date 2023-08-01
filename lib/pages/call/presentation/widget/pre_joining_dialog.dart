@@ -287,7 +287,7 @@ class PreJoiningDialog extends ConsumerWidget {
                   SizedBox(
                     width: 120.0,
                     child: notifier.isJoining
-                        ? const CircularProgressIndicator()
+                        ? Center(child: const CircularProgressIndicator())
                         : ElevatedButton(
                             onPressed: () => notifier.joinCall(
                               channelName: channelName,
