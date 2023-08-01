@@ -36,6 +36,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.dispose();
   }
 
+final Uri url = Uri.parse('https://github.com/Elmurodjon01/app_privacy_policy/blob/main/abdulajonov01%40gmail.com-privacy-policy');
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -303,14 +304,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             Icons.help_outline_rounded,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             size: 24,
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                            child: Text(
-                              'Support',
-                              style: FlutterFlowTheme.of(context).labelLarge,
-                            ),
                           ),
                           Expanded(
                             child: Align(
