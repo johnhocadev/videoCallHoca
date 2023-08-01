@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:video_call_app/pages/call/presentation/page/call_page.dart';
+import 'package:video_call_app/pages/call/presentation/page/create_channel_page.dart';
 import 'package:video_call_app/pages/home/presentation/page/home_page.dart';
 import 'package:video_call_app/pages/main/presentation/widget/main_bottom_bar.dart';
 import 'package:video_call_app/pages/main/presentation/widget/main_floating_button.dart';
@@ -15,7 +15,7 @@ class MainPage extends ConsumerWidget {
     final mainTool = ref.watch(mainProvider);
     const _pages = <Widget>[
       HomePage(),
-      CallPage(),
+      CreateChannelPage(),
       ProfileWidget(),
     ];
 
