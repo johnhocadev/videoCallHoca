@@ -309,12 +309,7 @@ class _EditInfoWidgetState extends State<EditInfoWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFDBE2E7),
-                                  ),
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.textController2Validator
                                   .asValidator(context),
                             ),
