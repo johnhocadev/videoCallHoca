@@ -112,7 +112,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Settings',
           path: '/settings',
-          builder: (context, params) => SettingsPage(),
+          builder: (context, params) => ProfileWidget(),
         ),
          FFRoute(
           name: 'Main',
