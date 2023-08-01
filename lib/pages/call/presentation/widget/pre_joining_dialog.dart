@@ -188,8 +188,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:video_call_app/pages/call/view_model/provider/pre_joining_provider.dart';
 
-
-
 class PreJoiningDialog extends ConsumerWidget {
   const PreJoiningDialog({
     super.key,
@@ -201,7 +199,7 @@ class PreJoiningDialog extends ConsumerWidget {
   final String channelName;
 
   @override
-  Widget build(BuildContext context, WidgetRef  ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(preJoiningDialogProvider);
 
     return Dialog(
@@ -218,12 +216,16 @@ class PreJoiningDialog extends ConsumerWidget {
                 'Joining Call',
                 style: TextStyle(
                   fontSize: 18.0,
+                  color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 8.0),
               const Text(
                 'You are about to join a video call. Please set your mic and camera preferences.',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
               ),
               const SizedBox(height: 16.0),
               Row(
@@ -234,12 +236,16 @@ class PreJoiningDialog extends ConsumerWidget {
                     children: [
                       InkWell(
                         borderRadius: BorderRadius.circular(32),
-                        onTap: () => notifier.isMicEnabled ? notifier.isMicEnabled = false : notifier.getMicPermissions(),
+                        onTap: () => notifier.isMicEnabled
+                            ? notifier.isMicEnabled = false
+                            : notifier.getMicPermissions(),
                         child: CircleAvatar(
                           backgroundColor: Colors.redAccent,
                           radius: 32.0,
                           child: Icon(
-                            notifier.isMicEnabled ? Icons.mic_rounded : Icons.mic_off_rounded,
+                            notifier.isMicEnabled
+                                ? Icons.mic_rounded
+                                : Icons.mic_off_rounded,
                             size: 32,
                           ),
                         ),
@@ -253,18 +259,23 @@ class PreJoiningDialog extends ConsumerWidget {
                     children: [
                       InkWell(
                         borderRadius: BorderRadius.circular(32),
-                        onTap: () => notifier.isCameraEnabled ? notifier.isCameraEnabled = false : notifier.getCameraPermissions(),
+                        onTap: () => notifier.isCameraEnabled
+                            ? notifier.isCameraEnabled = false
+                            : notifier.getCameraPermissions(),
                         child: CircleAvatar(
                           backgroundColor: Colors.redAccent,
                           radius: 32.0,
                           child: Icon(
-                            notifier.isCameraEnabled ? Icons.videocam_rounded : Icons.videocam_off_rounded,
+                            notifier.isCameraEnabled
+                                ? Icons.videocam_rounded
+                                : Icons.videocam_off_rounded,
                             size: 32,
                           ),
                         ),
                       ),
                       const SizedBox(height: 8),
-                      Text('Camera: ${notifier.isCameraEnabled ? 'On' : 'Off'}'),
+                      Text(
+                          'Camera: ${notifier.isCameraEnabled ? 'On' : 'Off'}'),
                     ],
                   ),
                 ],
@@ -278,9 +289,13 @@ class PreJoiningDialog extends ConsumerWidget {
                     child: notifier.isJoining
                         ? const CircularProgressIndicator()
                         : ElevatedButton(
-                      onPressed: () => notifier.joinCall(channelName: channelName,context: context, token: token,),
-                      child: const Text('Join'),
-                    ),
+                            onPressed: () => notifier.joinCall(
+                              channelName: channelName,
+                              context: context,
+                              token: token,
+                            ),
+                            child: const Text('Join'),
+                          ),
                   ),
                 ],
               ),
