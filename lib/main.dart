@@ -1,10 +1,10 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart' hide ChangeNotifierProvider;
 import 'package:provider/provider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
@@ -12,8 +12,6 @@ import 'backend/firebase/firebase_config.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
-import 'flutter_flow/nav/nav.dart';
-import 'index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +25,7 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
-    child: MyApp(),
+    child: ProviderScope(child: MyApp(),),
   ));
 }
 
@@ -76,6 +74,7 @@ class _MyAppState extends State<MyApp> {
     setState(() => _locale = createLocale(language));
   }
 
+
   void setThemeMode(ThemeMode mode) => setState(() {
         _themeMode = mode;
         FlutterFlowTheme.saveThemeMode(mode);
@@ -83,20 +82,25 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'VideoCallApp',
-      localizationsDelegates: [
-        FFLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      locale: _locale,
-      supportedLocales: const [Locale('en', '')],
-      theme: ThemeData(brightness: Brightness.light),
-      darkTheme: ThemeData(brightness: Brightness.dark),
-      themeMode: _themeMode,
-      routerConfig: _router,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (BuildContext context, Widget? child) =>  MaterialApp.router(
+        title: 'VideoCallApp',
+        localizationsDelegates: [
+          FFLocalizationsDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        locale: _locale,
+        supportedLocales: const [Locale('en', '')],
+        theme: ThemeData(brightness: Brightness.light),
+        darkTheme: ThemeData(brightness: Brightness.dark),
+        themeMode: _themeMode,
+        routerConfig: _router,
+      ),
     );
   }
 }

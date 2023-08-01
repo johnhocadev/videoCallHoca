@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.2"
+  agora_rtc_engine:
+    dependency: "direct main"
+    description:
+      name: agora_rtc_engine
+      sha256: "5e0d363c8ae68b08028d19a743972278266b8cb73f81243d09bc024f5541412c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
   async:
     dependency: transitive
     description:
@@ -25,6 +33,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  avatar_view:
+    dependency: "direct main"
+    description:
+      name: avatar_view
+      sha256: "5794a7dee2c56ebc9c938f6d506b7bfd000d1986caef1a67a50dd62fe87f4098"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -270,6 +286,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.0"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      sha256: "9eab8fd7aa752c3c1c0a364f9825851d410eb935243411682f4b1b0a4c569d71"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.0"
   flutter_localizations:
     dependency: "direct main"
     description: flutter
@@ -283,6 +307,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
+  flutter_riverpod:
+    dependency: transitive
+    description:
+      name: flutter_riverpod
+      sha256: b83ac5827baadefd331ea1d85110f34645827ea234ccabf53a655f41901a9bf4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.6"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      sha256: "1b61f8c4cbf965104b6ca7160880ff1af6755aad7fec70b58444245132453745"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.8.4"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -381,6 +421,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.0+2"
+  hooks_riverpod:
+    dependency: "direct main"
+    description:
+      name: hooks_riverpod
+      sha256: "117edbe7e5cfc02e31a94f97e2acd4581f54bc37fcda9dce1f606f8ac851ba24"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.7"
   html:
     dependency: transitive
     description:
@@ -453,6 +501,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.18.1"
+  iris_method_channel:
+    dependency: transitive
+    description:
+      name: iris_method_channel
+      sha256: dce2527839b46d1d0f0573b5ae1425e23a111afb280245ea1500f16a11957ad4
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   js:
     dependency: transitive
     description:
@@ -461,6 +517,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.1"
   json_path:
     dependency: "direct main"
     description:
@@ -597,6 +661,46 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.1"
+  permission_handler:
+    dependency: "direct main"
+    description:
+      name: permission_handler
+      sha256: "63e5216aae014a72fe9579ccd027323395ce7a98271d9defa9d57320d001af81"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.4.3"
+  permission_handler_android:
+    dependency: transitive
+    description:
+      name: permission_handler_android
+      sha256: "2ffaf52a21f64ac9b35fe7369bb9533edbd4f698e5604db8645b1064ff4cf221"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.3.3"
+  permission_handler_apple:
+    dependency: transitive
+    description:
+      name: permission_handler_apple
+      sha256: "99e220bce3f8877c78e4ace901082fb29fa1b4ebde529ad0932d8d664b34f3f5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "9.1.4"
+  permission_handler_platform_interface:
+    dependency: transitive
+    description:
+      name: permission_handler_platform_interface
+      sha256: "7c6b1500385dd1d2ca61bb89e2488ca178e274a69144d26bbd65e33eae7c02a9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.11.3"
+  permission_handler_windows:
+    dependency: transitive
+    description:
+      name: permission_handler_windows
+      sha256: cc074aace208760f1eee6aa4fae766b45d947df85bc831cde77009cdb4720098
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
   petitparser:
     dependency: transitive
     description:
@@ -645,6 +749,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.1"
+  riverpod:
+    dependency: transitive
+    description:
+      name: riverpod
+      sha256: "80e48bebc83010d5e67a11c9514af6b44bbac1ec77b4333c8ea65dbc79e2d8ef"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.6"
   rxdart:
     dependency: "direct main"
     description:
@@ -786,6 +898,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  state_notifier:
+    dependency: transitive
+    description:
+      name: state_notifier
+      sha256: "8fe42610f179b843b12371e40db58c9444f8757f8b69d181c97e50787caed289"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.2+1"
   stream_channel:
     dependency: transitive
     description:
@@ -988,4 +1108,4 @@ packages:
     version: "1.0.1"
 sdks:
   dart: ">=3.0.0 <4.0.0"
-  flutter: ">=3.3.0"
+  flutter: ">=3.10.0"

@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import '../flutter_flow_theme.dart';
-import '/backend/backend.dart';
+import 'package:video_call_app/pages/call/presentation/widget/calling_page.dart';
+import 'package:video_call_app/pages/editInfoPage/editInfoWidget.dart';
+import 'package:video_call_app/pages/main/presentation/page/main_page.dart';
+import 'package:video_call_app/pages/settings/notification/notification_view.dart';
+import 'package:video_call_app/pages/settings/presentation/pages/settings_page.dart';
 
 import '../../auth/base_auth_user_provider.dart';
 
 import '../../index.dart';
-import '../../main.dart';
-import '../lat_lng.dart';
-import '../place.dart';
 import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
@@ -77,20 +77,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : AuthenticationWidget(),
+          appStateNotifier.loggedIn ? MainPage() : AuthenticationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? HomePageWidget()
-              : AuthenticationWidget(),
+          builder: (context, _)=>
+             appStateNotifier.loggedIn
+              ? MainPage()
+              : OnboardingWidget(),
+     
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => HomePageWidget(),
+          builder: (context, params) => MainPage(),
         ),
+        // FFRoute(
+        //   name: 'CallPage',
+        //   path: '/callPage',
+        //
+        //
+        //   builder: (context, state) => CallingPage()
+        // ),
         FFRoute(
           name: 'Onboarding',
           path: '/onboarding',
@@ -100,7 +109,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'authentication',
           path: '/authentication',
           builder: (context, params) => AuthenticationWidget(),
-        )
+        ),
+         FFRoute(
+          name: 'EditInfoPage',
+          path: '/editinfopage',
+          builder: (context, params) => EditInfoWidget(),
+        ),
+         FFRoute(
+          name: 'Notification',
+          path: '/notification',
+          builder: (context, params) => NotificationWidget(),
+        ),
+        FFRoute(
+          name: 'Settings',
+          path: '/settings',
+          builder: (context, params) => ProfileWidget(),
+        ),
+         FFRoute(
+          name: 'Main',
+          path: '/main',
+          builder: (context, params) => MainPage(),
+        ),
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
