@@ -25,13 +25,6 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
     _channelNameController = TextEditingController();
   }
 
-  @override
-  void dispose() {
-    _unfocusNode.dispose();
-    super.dispose();
-  }
-
-
   Future<void> _joinRoom() async {
     if (!_formKey.currentState!.validate()) {
       return;
@@ -40,6 +33,7 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
 
     final channelState = ref.read(channelStateProvider.notifier);
     channelState.setIsCreatingChannel(true);
+    await channelState.getPermissions();
 
     try {
       final token = Constants().token;
@@ -47,6 +41,7 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
       await Future.delayed(
         const Duration(seconds: 1),
       );
+
       if (context.mounted) {
         await showDialog(
           context: context,
@@ -74,7 +69,6 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
-
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -83,7 +77,8 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
               width: screenSize.width,
               constraints: const BoxConstraints(maxWidth: 600),
               child: Padding(
-                padding: const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
+                padding:
+                    const EdgeInsetsDirectional.symmetric(horizontal: 24.0),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
@@ -175,20 +170,20 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
                       const SizedBox(height: 24.0),
                       channelState
                           ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [CircularProgressIndicator()],
-                      )
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [CircularProgressIndicator()],
+                            )
                           : SizedBox(
-                        width: double.infinity,
-                        height: 55,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                          ),
-                          onPressed: _joinRoom,
-                          child: const Text('Join Room'),
-                        ),
-                      ),
+                              width: double.infinity,
+                              height: 55,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.black,
+                                ),
+                                onPressed: _joinRoom,
+                                child: const Text('Join Room'),
+                              ),
+                            ),
                     ],
                   ),
                 ),

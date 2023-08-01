@@ -6,7 +6,6 @@ import 'package:video_call_app/pages/call/view_model/provider/video_call_prov.da
 
 class VideoCallPage extends ConsumerStatefulWidget {
   const VideoCallPage({
-
     required this.appId,
     required this.token,
     required this.channelName,
@@ -22,8 +21,7 @@ class VideoCallPage extends ConsumerStatefulWidget {
   final bool isVideoEnabled;
 
   @override
-  ConsumerState createState() =>
-      _VideoCallPageState();
+  ConsumerState createState() => _VideoCallPageState();
 }
 
 class _VideoCallPageState extends ConsumerState<VideoCallPage> {
@@ -31,12 +29,18 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
   void initState() {
     super.initState();
     ref.read(videoCallStateNotifierProvider).initialize(
-      widget.appId,
-      widget.token,
-      widget.channelName,
-      widget.isMicEnabled,
-      widget.isVideoEnabled,
-    );
+          widget.appId,
+          widget.token,
+          widget.channelName,
+          widget.isMicEnabled,
+          widget.isVideoEnabled,
+        );
+  }
+
+  @override
+  void didChangeDependencies() {
+    ref.read(videoCallStateNotifierProvider).disposeAgora();
+    super.didChangeDependencies();
   }
 
   @override
@@ -111,21 +115,17 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
                     if (users.isEmpty) {
                       return const SizedBox();
                     }
-                    WidgetsBinding.instance.addPostFrameCallback(
-                            (_) =>
-                        ref.read(videoCallStateNotifierProvider).viewAspectRatio = isPortrait ? 2 / 3 : 3 / 2);
+                    WidgetsBinding.instance.addPostFrameCallback((_) => ref
+                        .read(videoCallStateNotifierProvider)
+                        .viewAspectRatio = isPortrait ? 5 / 4 : 4 / 5);
 
-
-                    final layoutViews = ref.read(videoCallStateNotifierProvider.notifier)
+                    final layoutViews = ref
+                        .read(videoCallStateNotifierProvider.notifier)
                         .createLayout(users.length);
                     return AgoraVideoLayout(
-                    users: users,
-                    views: layoutViews
-                    ,
-                    viewAspectRatio
-                    :
-                    viewAspectRatio
-                    ,
+                      users: users,
+                      views: layoutViews,
+                      viewAspectRatio: viewAspectRatio,
                     );
                   },
                 ),
@@ -137,17 +137,13 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
                 isMicEnabled: videoCallState.isMicEnabled,
                 isVideoEnabled: videoCallState.isVideoEnabled,
                 onCallEnd: () =>
-                    ref.read(videoCallStateNotifierProvider).onCallEnd(
-                        context),
+                    ref.read(videoCallStateNotifierProvider).onCallEnd(context),
                 onToggleAudio: () =>
-                    ref.read(videoCallStateNotifierProvider)
-                        .onToggleAudio(),
+                    ref.read(videoCallStateNotifierProvider).onToggleAudio(),
                 onToggleCamera: () =>
-                    ref.read(videoCallStateNotifierProvider)
-                        .onToggleCamera(),
+                    ref.read(videoCallStateNotifierProvider).onToggleCamera(),
                 onSwitchCamera: () =>
-                    ref.read(videoCallStateNotifierProvider)
-                        .onSwitchCamera(),
+                    ref.read(videoCallStateNotifierProvider).onSwitchCamera(),
               ),
             ),
           ],
@@ -156,5 +152,3 @@ class _VideoCallPageState extends ConsumerState<VideoCallPage> {
     );
   }
 }
-
-

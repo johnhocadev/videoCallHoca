@@ -34,11 +34,11 @@ class AgoraVideoView extends StatelessWidget {
                 Center(
                   child: CircleAvatar(
                     backgroundColor: Colors.grey.shade800,
-                    maxRadius: 18,
+                    maxRadius: 50,
                     child: Icon(
                       Icons.person,
                       color: Colors.grey.shade600,
-                      size: 24.0,
+                      size: 50.0,
                     ),
                   ),
                 ),
