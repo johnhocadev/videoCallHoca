@@ -22,7 +22,7 @@ void main() async {
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
-  await FirebaseMessagingService().initNotifications();
+  // await FirebaseMessagingService().initNotifications();
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 

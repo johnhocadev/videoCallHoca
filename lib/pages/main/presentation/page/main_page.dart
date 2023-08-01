@@ -16,7 +16,7 @@ class MainPage extends ConsumerWidget {
     const _pages = <Widget>[
       HomePage(),
       CreateChannelPage(),
-      SettingsPage(),
+      ProfileWidget(),
     ];
 
     return Scaffold(
