@@ -5,9 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'editInfoModel.dart';
@@ -309,12 +307,7 @@ class _EditInfoWidgetState extends State<EditInfoWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Color(0xFFDBE2E7),
-                                  ),
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.textController2Validator
                                   .asValidator(context),
                             ),

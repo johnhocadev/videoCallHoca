@@ -113,7 +113,7 @@ class _CreateChannelPageState extends ConsumerState<CreateChannelPage> {
                       Form(
                         key: _formKey,
                         child: TextFormField(
-                          autofocus: true,
+                          autofocus: false,
                           controller: _channelNameController,
                           obscureText: false,
                           decoration: InputDecoration(
