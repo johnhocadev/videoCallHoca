@@ -38,7 +38,6 @@ class MainBottomBar extends StatelessWidget {
               selectedItemColor: AppColors.deepPurple,
               onTap: changePageIndex,
               items: const [
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
                 BottomNavigationBarItem(icon: Icon(Icons.call), label: ''),
                 BottomNavigationBarItem(icon: Icon(Icons.settings_outlined), label: ''),
               ],
